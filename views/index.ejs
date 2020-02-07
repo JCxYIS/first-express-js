@@ -1,0 +1,53 @@
+<%_ /* Created by Andrew Lin on Jan 2018. */ -%>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%_ /* 有登入的話輸出登出超連結 */ -%>
+    <%_ if(req.session.logined === true){ -%>
+    <a href="/logout">登出</a>      
+    <%_ /* 沒登入的話輸出註冊和登入超連結 */ -%>
+    <%_ }else{ -%>
+    <a href="/register">註冊</a>
+    <a href="/login">登入</a>
+    <%_ } -%>
+    <h1>首頁</h1>
+    <%_ /* 有登入的話輸出新增文章表單 */ -%>
+    <%_ if(req.session.logined === true){ -%>
+    <form action="/post_article" method="post">
+      <textarea name="content" cols="30" rows="10"></textarea><br>
+      <input type="submit" value="送出">
+    </form>
+    <%_ } -%>
+    <table>
+      <thead>
+        <tr>
+          <th>暱稱</th>
+          <th>文章內容</th>
+          <th>檢視留言</th>
+          <%_ /*有登入的話輸出刪除和修改欄位*/ -%>
+          <%_ if(req.session.logined === true){ -%>
+          <th>刪除</th>
+          <th>修改</th>
+          <%_ } -%>
+        </th>
+      </thead>
+      <%_ /* 輸出每個文章 */ -%>
+      <%_ for (let i in result){ -%>
+      <tr>
+        <td><%- result[i]['name'] %></td>
+        <td><%- result[i]['content'] %></td>
+        <td><a href="/article/<%- result[i]['_id'] %>">檢視</a></td>
+        <%_ /* 如果這個文章是現在的使用者發的或是現在的使用者是管理員 */ -%>
+        <%_ if ((req.session.account === result[i]['account']) || (req.session.type === "admin")){ -%>
+        <td><a href="/delete_article/<%- result[i]['_id'] %>">刪除</a></td>
+        <td><a href="/edit_article/<%- result[i]['_id'] %>">修改</a></td>
+        <%_ } -%>
+      </tr>
+      <%_ } -%>
+    </table>
+  </body>
+</html>
