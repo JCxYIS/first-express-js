@@ -1,6 +1,6 @@
 {
   "name": "testweb",
-  "version": "487.63",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
