@@ -10,6 +10,9 @@ var index = require('./routes/index');
 
 var app = express();
 
+
+app.listen(3000, () => console.log(`Example app listening on port ${port}!`)); 
+
 // 資料庫設定！！！！！
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
