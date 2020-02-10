@@ -2,27 +2,150 @@
 <head>
     <title>你說這啥</title>
 </head>
+
 <body>
-    <form action="loginAction" method="post">
-        <div class="imgcontainer">
-          <!-- <img src="img_avatar2.png" alt="Avatar" class="avatar"> -->
+
+<h1>警告：需要HMCL與O5批准</h1>
+<h2>您正在嘗試查看的文檔只對持有4/2000權限人員開放。該權限不包含於常規4級安保協議中。</h2>
+<hr>
+
+<!-- Button to open the modal login form -->
+<button onclick="document.getElementById('login').style.display='block'">提交登入申請</button>
+<br><br>
+
+<button onclick="document.getElementById('signup').style.display='block'">製作人員憑證</button>
+
+
+
+<!-- The Modal -->
+<div id="login" class="modal">
+    <!-- Modal Content -->
+    <form class="modal-content animate" action="loginAction">
+        <div>
+            <h2>登入</h2>
         </div>
-      
-        <div class="container">
-          <label for="uname"><b>帳號：</b></label>
+
+        <div class="container" style="padding: 0px 10px 10px 10px;">
+          <label for="uname"><b>帳號</b></label>
           <input type="text" placeholder="Enter Username" name="uname" required>
           <br>
 
-          <label for="psw"><b>密碼：</b></label>
+          <label for="psw"><b>密碼</b></label>
           <input type="password" placeholder="Enter Password" name="psw" required>
-          <br>  
-
+          <br>
+          <br>
+        
           <button type="submit">讓我進去！</button>
           <label>
             <!-- <input type="checkbox" checked="checked" name="remember"> Remember me -->
           </label>
         </div>
-      </form>
-</form>
+
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">取消</button>
+          <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
+        </div>
+    </form>
+</div>
+
+<!-- The Modal -->
+<div id="signup" class="modal">
+    <!-- Modal Content -->
+    <form class="modal-content animate" action="signupAction">
+        <div>
+            <h2>創立帳號</h2>
+        </div>
+
+        <div class="container" style="padding: 0px 10px 10px 10px;">
+          <label for="name"><b>汝之名</b></label>
+          <input type="text" placeholder="Enter Your Name" name="name" required>
+          <br>
+
+          <label for="uname"><b>新帳號</b></label>
+          <input type="text" placeholder="Enter Username" name="uname" required>
+          <br>
+
+          <label for="psw"><b>新密碼</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" required>
+          <br>
+          <br>
+        
+          <button type="submit">確認！</button>
+          <label>
+            <!-- <input type="checkbox" checked="checked" name="remember"> Remember me -->
+          </label>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('signup').style.display='none'" class="cancelbtn">取消</button>
+          <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
+        </div>
+    </form>
+</div>
+
 </body>
+
+<style>
+body
+{
+    text-align: center;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5px auto; /* 15% from the top and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  /* Position it in the top right corner outside of the modal */
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+/* Close button on hover */
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)}
+  to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+  from {transform: scale(0)}
+  to {transform: scale(1)}
+}
+</style>
 </html>
