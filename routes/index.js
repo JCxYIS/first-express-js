@@ -6,6 +6,6 @@ const path = require('path');
 router.get('/', function(req, res, next) 
 {
   //
-  res.sendFile( path.dirname(__dirname) + "/views/index.html" );
+  res.sendFile( path.dirname(__dirname) + "/views/login.html" );
 });
 module.exports = router;

@@ -23,6 +23,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+// mongodb setup
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/test20200202', {useMongoClient: true});
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {console.log("[Mongoose] 成功連上mongoDB")});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

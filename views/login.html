@@ -4,17 +4,19 @@
 </head>
 
 <body>
+<div style="padding: 15px;">
+  <h1>警告：需要 HMCL 與 O5 批准</h1>
+  <h2>您正在嘗試查看的文檔只對持有 4/2000 權限人員開放。該權限不包含於常規 4 級安保協議中。</h2>
+</div>
 
-<h1>警告：需要HMCL與O5批准</h1>
-<h2>您正在嘗試查看的文檔只對持有4/2000權限人員開放。該權限不包含於常規4級安保協議中。</h2>
 <hr>
 
+<div style="padding: 15px;">
 <!-- Button to open the modal login form -->
-<button onclick="document.getElementById('login').style.display='block'">提交登入申請</button>
-<br><br>
-
-<button onclick="document.getElementById('signup').style.display='block'">製作人員憑證</button>
-
+  <button class="bigbutt" onclick="document.getElementById('login').style.display='block'">提交登入申請</button>
+  <br><br>
+  <button class="bigbutt" onclick="document.getElementById('signup').style.display='block'">製作人員憑證</button>
+</div>
 
 
 <!-- The Modal -->
@@ -89,6 +91,7 @@
 body
 {
     text-align: center;
+    font-family: monospace, "微軟正黑體";
 }
 
 /* The Modal (background) */
@@ -136,6 +139,12 @@ body
 .animate {
   -webkit-animation: animatezoom 0.6s;
   animation: animatezoom 0.6s
+}
+
+.bigbutt
+{
+  font-size: xx-large;
+  font-family: "標楷體", monospace;
 }
 
 @-webkit-keyframes animatezoom {
