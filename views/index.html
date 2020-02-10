@@ -3,11 +3,26 @@
     <title>你說這啥</title>
 </head>
 <body>
-<form action="http://127.0.0.1:8081/process_get" method="GET">
-First Name: <input type="text" name="first_name">  <br>
- 
-Last Name: <input type="text" name="last_name">
-<input type="submit" value="Submit">
+    <form action="loginAction" method="post">
+        <div class="imgcontainer">
+          <!-- <img src="img_avatar2.png" alt="Avatar" class="avatar"> -->
+        </div>
+      
+        <div class="container">
+          <label for="uname"><b>帳號：</b></label>
+          <input type="text" placeholder="Enter Username" name="uname" required>
+          <br>
+
+          <label for="psw"><b>密碼：</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" required>
+          <br>  
+
+          <button type="submit">讓我進去！</button>
+          <label>
+            <!-- <input type="checkbox" checked="checked" name="remember"> Remember me -->
+          </label>
+        </div>
+      </form>
 </form>
 </body>
 </html>
