@@ -1,0 +1,24 @@
+{
+  "name": "testweb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-generator": "^4.16.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JCxYIS/first-express-js.git"
+  },
+  "author": "JCxYIS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JCxYIS/first-express-js/issues"
+  },
+  "homepage": "https://github.com/JCxYIS/first-express-js#readme"
+}
