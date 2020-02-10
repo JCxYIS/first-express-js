@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: '首頁\n<a src="index.html">Title</a>' });
 });
 
-router.get('/index.html', function (req, res) {
+router.get('/index', function (req, res) {
   res.sendFile( __dirname + "/views/index.html" );
 })
 
