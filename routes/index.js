@@ -21,7 +21,7 @@ router.post('/loginAction', function (req, res)
   res.render('index', 
     { 
       title: '好棒，你登入了',
-      content: '使用的帳號是'+response.uname 
+      message: '使用的帳號是'+response.uname 
     }
   );
 
