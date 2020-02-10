@@ -18,12 +18,7 @@ router.post('/loginAction', function (req, res)
   };
 
   console.log("用戶資訊：", response);
-  res.render('index', 
-    { 
-      title: '好棒，你登入了',
-      message: '使用的帳號是'+response.uname 
-    }
-  );
+  res.render( 'index', {title: '好棒，你登入了',message: '使用的帳號是'+response.uname} );
 
 
 })
