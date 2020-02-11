@@ -48,7 +48,7 @@ router.post('/delete', function (req, res) {
 		{
 			if (err) next(err)
 
-			res.render("index", { title:"削除。", message:"除掉了" });
+			res.render("index", { title:"削除。", message:"Done: 記憶抹殺" });
 		}
 	);
 })
@@ -57,8 +57,7 @@ router.post('/save', function (req, res) {
 	//
 	Article.findOne({ _id: req.session.editingArticle}).exec(
 		function (err, result) {
-			if (err) return console.log(err)
-
+			
 			// result strings
 			let resultStr = 
 			{
