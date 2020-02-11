@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/user');
+var User = require('../models/User');
 
 // Log in
 router.post('/loginAction', function (req, res) {
@@ -19,12 +19,12 @@ router.post('/loginAction', function (req, res) {
 })
 
 // Sign up
-router.post('/signupAction', function (req, res) {
+router.post('/signupAction', function (req, res, next) {
 
 	// make new user class
 	var newuser = new User
 		({
-			name: req.body.uname,
+			name: req.body.name,
 			uname: req.body.uname,
 			psw: req.body.psw
 		})
@@ -32,44 +32,49 @@ router.post('/signupAction', function (req, res) {
 	// result strings
 	var resultStr = 
 	{
-		title: String,
-		message: String
-	}
-
+		title: "loading",
+		message: "now loading"
+	};
+	
 	// find if account has already exist
-	User.findOne({account: req.body.account}).exec(
+	User.findOne({uname: req.body.uname}).exec(
 		function(err,result)
 		{
 			if(err)
-				return next(err); // throw err to expressjs
+			{	
+				return next(err); // throw err to expressjs;
+			}
+
 			if(result == null) // no cunt yee
 			{
 				// save account
 				newuser.save(
 					function(err)
 					{
-						if(err)
-							return next(err); // throw err to expressjs
+						return next(err); // throw err to expressjs
 					}
 				);
 
 				// then, you logged in
-				req.session.logined = true;
-				req.session.account = req.body.account;
+				//req.session.logined = true;
+				//req.session.account = req.body.account;
 				resultStr.title = "創建成功！";
-				resultStr.message = "你的帳號是"+req.body.account;
+				resultStr.message = "你的帳號是"+req.body.uname;
 			}
 			else // you cunt
 			{
 				resultStr.title = "錯誤";
-				resultStr.message = req.body.account+" 已經有同名的帳號了";
+				resultStr.message = req.body.uname+" 已經有同名的帳號了";
 			}
-		}
-	)
 
-	// print success msg
-	console.log("[創號]用戶資訊：", newuser, "\nResult:", resultStr.title);
-	res.render('index', resultStr);
+			// print success msg
+			console.log("[創號]用戶資訊：", newuser, "\nResult:", resultStr.title);
+			res.render('index', resultStr);
+		}
+	);
+
+	// loading
+	
 })
 
 
