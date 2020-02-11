@@ -30,7 +30,7 @@ app.use(session({
 
 // ROUTES
 app.use('/', indexRouter);
-app.use('/', usersRouter);
+app.use('/login', usersRouter);
 
 // mongodb setup
 var mongoose = require('mongoose');

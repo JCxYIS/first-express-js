@@ -1,6 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/User');
+const path = require('path');
+
+// Page
+router.get('/', function(req, res, next) 
+{
+  //
+  res.sendFile( path.dirname(__dirname) + "/views/loginPage.html" );
+  //res.render("loginPage");
+});
+
 
 // Log in
 router.post('/loginAction', function (req, res) {
@@ -32,8 +42,8 @@ router.post('/signupAction', function (req, res, next) {
 	// result strings
 	let resultStr = 
 	{
-		title: "loading",
-		message: "now loading"
+		title: "t",
+		message: "m"
 	};
 	
 	// find if account has already exist
