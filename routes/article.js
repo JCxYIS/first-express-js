@@ -18,6 +18,7 @@ router.param("id", function (req, res, next, name) {
 
 router.get('/scp/:id', function (req, res) {
 	console.log('[View Article] ID=' + req.articleId);
+	req.session.readingArticle = req.articleId;
 	if(req.article.authorUserName == req.session.loginUser)
 		res.render("article", { articleObj: req.article, canEdit: true, isEditing: false });
 	else
@@ -26,14 +27,37 @@ router.get('/scp/:id', function (req, res) {
 
 router.get('/create', function (req, res) {
 	let newArt = new Article({ authorUserName: req.session.loginUser })
+	req.session.editingArticle = 0;
 	res.render("article", { articleObj: newArt, canEdit: true, isEditing: true });
+})
+
+router.post('/edit', function (req, res) {
+	Article.findOne({ _id: req.session.readingArticle }).exec(
+		function (err, result) 
+		{
+			if (err) next(err)
+			req.session.editingArticle = req.session.readingArticle;
+			res.render("article", { articleObj: result, canEdit: true, isEditing: true });
+		}
+	);
+})
+
+router.post('/delete', function (req, res) {
+	Article.deleteOne({ _id: req.session.readingArticle }).exec(
+		function (err, result) 
+		{
+			if (err) next(err)
+
+			res.render("index", { title:"削除。", message:"除掉了" });
+		}
+	);
 })
 
 router.post('/save', function (req, res) {
 	//
-	Article.findOne({ _id: req.body.id }).exec(
+	Article.findOne({ _id: req.session.editingArticle}).exec(
 		function (err, result) {
-			if (err) next(err)
+			if (err) return console.log(err)
 
 			// result strings
 			let resultStr = 
@@ -58,12 +82,20 @@ router.post('/save', function (req, res) {
 			}
 			else 
 			{
-				result.name = req.body.name;
-				result.lastEdit = Date.now();
-				result.content = req.body.content;
-				resultStr.title = "已更新文章";
-				resultStr.message = result.toString();
-				result.update();
+				if(result.authorUserName == req.session.loginUser)
+				{
+					result.name = req.body.name;
+					result.lastEdit = Date.now();
+					result.content = req.body.content;
+					resultStr.title = "已更新文章";
+					resultStr.message = result.toString();
+					result.save();
+				}
+				else
+				{
+					resultStr.title = "權限不符";
+					resultStr.message = "Are you a hacker?";
+				}
 			}
 
 			// let's end this
