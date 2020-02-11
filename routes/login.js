@@ -4,7 +4,7 @@ var User = require('../models/User');
 
 // Log in
 router.post('/loginAction', function (req, res) {
-	var response =
+	let response =
 	{
 		"uname": req.body.uname,
 		"psw": req.body.psw
@@ -22,7 +22,7 @@ router.post('/loginAction', function (req, res) {
 router.post('/signupAction', function (req, res, next) {
 
 	// make new user class
-	var newuser = new User
+	let newuser = new User
 		({
 			name: req.body.name,
 			uname: req.body.uname,
@@ -30,7 +30,7 @@ router.post('/signupAction', function (req, res, next) {
 		})
 	
 	// result strings
-	var resultStr = 
+	let resultStr = 
 	{
 		title: "loading",
 		message: "now loading"
@@ -55,9 +55,9 @@ router.post('/signupAction', function (req, res, next) {
 					}
 				);
 
-				// then, you logged in
-				//req.session.logined = true;
-				//req.session.account = req.body.account;
+				// then, u r logged in
+				req.session.logined = true;
+				req.session.account = req.body.account;
 				resultStr.title = "創建成功！";
 				resultStr.message = "你的帳號是"+req.body.uname;
 			}

@@ -17,6 +17,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Cookie & Session
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+var session = require('express-session')
+app.use(session({
+  secret: 'JC is not a lolicon!!!',
+  cookie: {maxAge: 3600 * 1000}, // expires at（milliseconds）
+  resave: false,
+  saveUninitialized: false
+}))
+
 // ROUTES
 app.use('/', indexRouter);
 app.use('/', usersRouter);
@@ -29,16 +40,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {console.log("[Mongoose] 成功連上mongoDB")});
 
-// Cookie & Session
-var cookieParser = require('cookie-parser');
-app.use(cookieParser());
-var session = require('express-session')
-app.use(session({
-  secret: 'JC is not a lolicon!!!',
-  cookie: {maxAge: 3600 * 1000}, // expires at（milliseconds）
-  resave: false,
-  saveUninitialized: false
-}))
+
 
 
 // catch 404 and forward to error handler
