@@ -109,6 +109,13 @@ router.post('/signupAction', function (req, res, next) {
 	
 })
 
+// Log out
+router.post('/logoutAction', function (req, res) {
+	console.log("[登出]用戶：", req.session.loginUser);
+	req.session.loginUser = null;
+	req.session.logined = false;
+	res.render('index', {title:"登出成功", message: "再見"});
+});
 
 
 module.exports = router;
