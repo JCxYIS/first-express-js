@@ -5,6 +5,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/login');
+var articleRouter = require('./routes/article');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use(session({
 // ROUTES
 app.use('/', indexRouter);
 app.use('/login', usersRouter);
+app.use('/article', articleRouter);
 
 // mongodb setup
 var mongoose = require('mongoose');

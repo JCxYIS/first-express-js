@@ -12,10 +12,12 @@ block content
       each val in articleList 
           tr
             td
-              a(href="/content")= val.name      
+              a(href="/article/scp/"+val._id)= val.name      
             td= val.authorUserName
-            td= val.lastEdit
+            td= (new Date(val.lastEdit)).toLocaleString()
     
     br
     form(action="login/logoutAction", method="post") 
       button(type="submit") 登出
+    form(action="article/create", method="get") 
+      button(type="submit") 撰寫新記錄

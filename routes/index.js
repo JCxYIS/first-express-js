@@ -14,19 +14,8 @@ router.get('/', function (req, res, next)
 		Article.find({}).exec(
 			function(err,result)
 			{
-				if(err) next(err)
-
-				/*
-				let test = new Article
-				({
-					name          : "這是測試"+Date.now(),
-    				authorUserName: "JCxYIS",
-    				lastEdit      : Date.now(),
-    				content       : "now="+Date.now().toString(),
-				})
-				test.save();
-				*/
-				
+				if(err) next(err)				
+						
 				//console.log(result);
 				res.render("billboard", {articleList: result});
 			}
