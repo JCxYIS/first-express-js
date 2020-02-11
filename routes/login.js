@@ -14,18 +14,45 @@ router.get('/', function(req, res, next)
 
 // Log in
 router.post('/loginAction', function (req, res) {
-	let response =
+	let newuser = new User
+	({
+		name: req.body.name,
+		uname: req.body.uname,
+		psw: req.body.psw
+	});
+
+	// result strings
+	let resultStr = 
 	{
-		"uname": req.body.uname,
-		"psw": req.body.psw
+		title: "ts",
+		message: "ms"
 	};
 
-	console.log("[登入]用戶資訊：", response);
-	res.render('index',
+	// find if account has already exist
+	User.findOne({uname: req.body.uname, psw: req.body.psw}).exec(
+		function(err,result)
 		{
-			title: '好棒，你登入了',
-			message: '使用的帳號是' + response.uname
-		});
+			if(err)	
+				return next(err); // throw err to expressjs;
+
+			if (result == null) // no 
+			{
+				resultStr.title = "身分認證失敗";
+				resultStr.message = "帳號或密碼錯誤";
+			}
+			else // yes
+			{
+        	  	req.session.logined = true;
+			  	req.session.loginUser = result.uname;
+			  	resultStr.title = "身分認證成功";
+				resultStr.message = "登入身分為 "+req.session.loginUser;
+			}
+			
+			console.log("[登入]用戶資訊：", newuser, "\nResult:", resultStr.title);
+			res.render('index', resultStr);
+		}
+	);
+	// load
 })
 
 // Sign up
@@ -33,11 +60,11 @@ router.post('/signupAction', function (req, res, next) {
 
 	// make new user class
 	let newuser = new User
-		({
-			name: req.body.name,
-			uname: req.body.uname,
-			psw: req.body.psw
-		})
+	({
+		name: req.body.name,
+		uname: req.body.uname,
+		psw: req.body.psw
+	})
 	
 	// result strings
 	let resultStr = 
@@ -50,10 +77,8 @@ router.post('/signupAction', function (req, res, next) {
 	User.findOne({uname: req.body.uname}).exec(
 		function(err,result)
 		{
-			if(err)
-			{	
+			if(err)	
 				return next(err); // throw err to expressjs;
-			}
 
 			if(result == null) // no cunt yee
 			{
@@ -65,11 +90,8 @@ router.post('/signupAction', function (req, res, next) {
 					}
 				);
 
-				// then, u r logged in
-				req.session.logined = true;
-				req.session.account = req.body.account;
 				resultStr.title = "創建成功！";
-				resultStr.message = "你的帳號是"+req.body.uname;
+				resultStr.message = "你的帳號是"+req.body.uname+"\n請重新登入！";
 			}
 			else // you cunt
 			{
