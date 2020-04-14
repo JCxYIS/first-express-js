@@ -1,0 +1,70 @@
+extends layout
+
+block extra_css
+	link(rel='stylesheet', href='/stylesheets/login.css')
+
+block content
+	//- div
+	//-   h1 警告：需要 HMCL 與 O5 批准
+	//-   h2 您正在嘗試查看的文檔只對持有 4/2000 權限人員開放。該權限不包含於常規 4 級安保協議中。
+	//- hr
+
+	//- div
+	//-   button(class="bigbutt" onclick="document.getElementById('login').style.display='block'") 創號
+	//-   br
+	//-   br
+	//-   button(class="bigbutt" onclick="document.getElementById('signup').style.display='block'") 製作人員憑證
+
+
+	div(id="login" class="d-flex justify-content-center")
+		div(class="card")
+			form(action="login/loginAction" method="POST")
+				div(class="card-header")
+					h1 登入
+
+				div(class="card-body")
+					label(for="uname")
+						b 帳號
+					input(class="form-control" placeholder="Enter Username" name="uname" required)
+					br
+
+					label(for="psw")
+						b 密碼
+					input(class="form-control" type="password"  placeholder="Enter Password" name="psw" required)
+					br
+					br
+
+				div(class="card-footer")
+					div(class="row justify-content-center")
+						button(class="btn btn-primary btn-lg" type="submit") 登入！
+					br
+					div(class="row justify-content-center")
+						button(class="btn btn-link" onclick="document.getElementById('signup').style.display='block'") 註冊		  
+
+	//- The Modal 
+	div(id="signup" class="modal")
+		form(class="modal-content animate" action="login/signupAction" method="POST")
+			div
+				h2 創立帳號
+
+			div(class="container" style="padding: 0px 10px 10px 10px;")
+				label(for="name")
+					b 你的名字
+				input(type="text" placeholder="Enter Your Name" name="name" required)
+				br
+
+				label(for="uname")
+					b 新的帳號
+				input(type="text" placeholder="Enter Username" name="uname" required)
+				br
+
+				label(for="psw")
+					b 新的密碼
+				input(type="password" placeholder="Enter Password" name="psw" required)
+				br
+				br
+
+				div
+					button(type="submit") 確認！
+				div
+					button(type="button" onclick="document.getElementById('signup').style.display='none'" class="cancelbtn") 取消

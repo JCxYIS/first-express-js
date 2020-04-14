@@ -1,0 +1,31 @@
+extends layout
+
+block extra_css
+    link(rel='stylesheet', href='/css/Login-Form-Dark.css')
+ 
+block raw_content
+    #login-panel.login-dark
+      form(method='post', action='login/loginAction')
+        .illustration
+          i.icon.ion-ios-locked-outline
+        .form-group
+          input.form-control(type='', data-toggle='tooltip', data-bs-tooltip='', name='uname', placeholder='帳號', title='請輸入你的帳號' required)
+        .form-group
+          input.form-control(type='password', data-toggle='tooltip', data-bs-tooltip='', name='psw', placeholder='密碼', title='請輸入你的密碼' required)
+        .form-group
+          button.btn.btn-primary.btn-block(data-toggle='tooltip', data-bs-tooltip='', data-placement='bottom', data-bs-hover-animate='pulse', type='submit', title='完成了嗎？我們出發吧！') 出發！
+        a.forgot(data-toggle='tooltip', data-bs-tooltip='', href='javascript:void(0)', title='你是忘記了，還是害怕想起來？', onclick='ToggleSignUp();') 或者你也可能想要 註冊
+    #signup-panel.login-dark
+      form(method='post', action='login/signupAction')
+        .illustration
+          i.icon.ion-ios-person-outline
+        .form-group
+          input.form-control(type='', data-toggle='tooltip', data-bs-tooltip='', name='name', placeholder='暱稱', title='想要被叫做什麼呢？' required)
+        .form-group
+          input.form-control(type='', data-toggle='tooltip', data-bs-tooltip='', name='uname', placeholder='新帳號', title='請輸入你的新帳號' required)
+        .form-group
+          input.form-control(type='password', data-toggle='tooltip', data-bs-tooltip='', name='psw', placeholder='新密碼', title='請輸入你的新密碼' required)
+        .form-group
+          button.btn.btn-primary.btn-block(data-toggle='tooltip', data-bs-tooltip='', data-placement='bottom', data-bs-hover-animate='pulse', type='submit', title='完成了嗎？我們出發吧！') 確認！
+        a.forgot(data-toggle='tooltip', data-bs-tooltip='', href='javascript:void(0)', title='你是忘記了，還是害怕想起來？', onclick='ToggleLogin();') 按錯了？ 回登入頁
+

@@ -2,6 +2,44 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, shrink-to-fit=no')
+    link(rel='icon', type='image/png', sizes='128x128', href='/img/dogekink.png')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Cookie')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Lora')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')
+    link(rel='stylesheet', href='/css/Article-Clean.css')
+    link(rel='stylesheet', href='/css/Footer-Basic.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')
+    link(rel='stylesheet', href='/css/Pretty-Footer.css')
+    link(rel='stylesheet', href='/css/styles.css')
+    block extra_css
   body
-    block content
+    block raw_content
+    div(class="container")
+      block content
+
+    // print toasts
+    div(aria-live='polite', aria-atomic='true', style='position: relative; min-height: 200px;')
+      // position it
+      div(style='position: absolute; top: 0; right: 0;')
+        if toast
+            .toast(role='alert', aria-live='assertive', aria-atomic='true')
+              .toast-header
+                //img.rounded.mr-2(src='...', alt='...')
+                strong.mr-auto= toast.title
+                button.ml-2.mb-1.close(type='button', data-dismiss='toast', aria-label='Close')
+                  span(aria-hidden='true') ×
+              .toast-body= toast.message
+            script
+              $('.toast').toast('show');
+
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js')
+    script(src='/js/bs-init.js')
+    script(src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js')
+    script(src='https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js')
+    script(src='/js/Bootstrap-DataTables.js')
+    script(src='/js/login-panel-control.js')

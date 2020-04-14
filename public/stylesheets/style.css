@@ -1,8 +1,19 @@
-body {
-  padding: 50px;
-  font: 14px "微軟正黑體", "Lucida Grande", Helvetica, Arial, sans-serif;
+*
+{
+  font-family: "jf open 粉圓 1.0", "微軟正黑體", "Lucida Grande", Helvetica, Arial, sans-serif;  
+}
+body
+{
+  
 }
 
-a {
+a 
+{
   color: #00B7FF;
+}
+
+.container
+{
+  width: auto;
+  margin-top: 30px;
 }

@@ -1,37 +1,34 @@
 extends layout
 
 block content
-
-    // 傳入 articleObj | canEdit | isEditing
-
-    if isEditing
-        form(action="save", method="post" id="edit")
-            input(type="text", name="name" value= articleObj.name)
-            hr
-            textarea(cols="30", rows="10", name="content", form="edit")= articleObj.content
+    .article-clean(style='margin: 50px;')
+      .intro
+        if isEditing
+          form(action="save", method="post" id="edit")
+            input(type="text", name="name" style="font-size: 32px" value=articleObj.name)
+            p.text-center
+              span.by You are editing...
+            textarea(cols="75%", rows="10", name="content", style="font-size: 18px" form="edit")= articleObj.content
+            button.btn.btn-primary(type="submit") 儲存
             br
-            br
-            label(for="id") 文章ID：
-            input(type="text" name="id" disabled value= articleObj._id)
-            br
-            button(type="submit") 儲存
-    else
-        h1= articleObj.name
-        hr
-        p= articleObj.content
+        else
+          h1.text-center= articleObj.name
+          p.text-center
+            span.by by
+            a(href='#')= articleObj.authorUserName
+            span.date= (new Date(articleObj.lastEdit)).toLocaleString()
 
-    br
-    hr
+      .text
+        if !isEditing
+          p= articleObj.content
 
-    p= "Author: " 
-        b= articleObj.authorUserName
-    p= "Last Edit: "
-        b= (new Date(articleObj.lastEdit)).toLocaleString()
-    button(onclick="window.location.href = '../../'") 返回列表
+      div
+        span
+          button.btn.btn-primary(type='button', onclick="window.location.href = '../../'", style='width: 130px;') 返回
 
-    if canEdit && !isEditing
-        form(action="../edit", method="post" id="editButt")            
-            button(type="submit") 編輯
-        form(action="../delete", method="post" id="editButt")            
-            button(type="submit") 刪除
+        if canEdit && !isEditing
+          form.col-md-12(action='../edit', method='post', style='margin: 0;margin-top: 12px;margin-bottom: 11px;')
+            button.btn.btn-warning(type='submit', style='width: 130px;') 編輯
+          form.col-md-12(action='../delete', method='post')
+            button.btn.btn-danger(type='submit', style='width: 130px;') 刪除
     

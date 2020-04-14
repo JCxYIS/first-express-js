@@ -1,23 +1,29 @@
 extends layout
 
+ 
 block content
-    h1 布告欄
+  body(style='margin: 60px;')
+    .article-clean
+      h1.text-center(data-bs-hover-animate='pulse') 布告欄
+      .table-responsive(style='margin-top: 30px;')
+        table.table
+          thead
+            tr
+              th.table-info(style='width: 199px;') 最後編輯
+              th.table-info 標題
+              th.table-info 作者
+          tbody
+            
+            each val in articleList
+              tr(data-bs-hover-animate='jello', style='background-color: #e4e4e4; cursor: pointer;' onclick="window.location.href='/article/scp/"+val._id+"'")
+                td= (new Date(val.lastEdit)).toLocaleString()
+                td= val.name
+                td= val.authorUserName
 
-    table
-      tr
-         td= "內容"
-         td= "作者"
-         td= "最後更改"
-      // 傳入article
-      each val in articleList 
-          tr
-            td
-              a(href="/article/scp/"+val._id)= val.name      
-            td= val.authorUserName
-            td= (new Date(val.lastEdit)).toLocaleString()
-    
-    br
-    form(action="login/logoutAction", method="post") 
-      button(type="submit") 登出
-    form(action="article/create", method="get") 
-      button(type="submit") 撰寫新記錄
+    div(style="text-align: center; margin-top: 12px")
+      form.col-md-12(action='article/create', method='get')
+        button.btn.btn-info(type='submit', style='width: 130px;') 新文章
+      br
+      form.col-md-12(action='login/logoutAction', method='post')
+        button.btn.btn-warning(type='submit', style='width: 130px;') 登出
+      

@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    h1 布告欄
+
+    table
+      tr
+         td= "內容"
+         td= "作者"
+         td= "最後更改"
+      // 傳入article
+      each val in articleList 
+          tr
+            td
+              a(href="/article/scp/"+val._id)= val.name      
+            td= val.authorUserName
+            td= (new Date(val.lastEdit)).toLocaleString()
+    
+    br
+    form(action="login/logoutAction", method="post") 
+      button(type="submit") 登出
+    form(action="article/create", method="get") 
+      button(type="submit") 撰寫新記錄

@@ -1,0 +1,37 @@
+extends layout
+
+block content
+
+    // 傳入 articleObj | canEdit | isEditing
+
+    if isEditing
+        form(action="save", method="post" id="edit")
+            input(type="text", name="name" value= articleObj.name)
+            hr
+            textarea(cols="30", rows="10", name="content", form="edit")= articleObj.content
+            br
+            br
+            label(for="id") 文章ID：
+            input(type="text" name="id" disabled value= articleObj._id)
+            br
+            button(type="submit") 儲存
+    else
+        h1= articleObj.name
+        hr
+        p= articleObj.content
+
+    br
+    hr
+
+    p= "Author: " 
+        b= articleObj.authorUserName
+    p= "Last Edit: "
+        b= (new Date(articleObj.lastEdit)).toLocaleString()
+    button(onclick="window.location.href = '../../'") 返回列表
+
+    if canEdit && !isEditing
+        form(action="../edit", method="post" id="editButt")            
+            button(type="submit") 編輯
+        form(action="../delete", method="post" id="editButt")            
+            button(type="submit") 刪除
+    

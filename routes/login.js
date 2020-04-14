@@ -7,8 +7,8 @@ const path = require('path');
 router.get('/', function(req, res, next) 
 {
   //
-  res.sendFile( path.dirname(__dirname) + "/views/loginPage.html" );
-  //res.render("loginPage");
+  //res.sendFile( path.dirname(__dirname) + "/views/loginPage.html" );
+  res.render("login");
 });
 
 
@@ -39,6 +39,8 @@ router.post('/loginAction', function (req, res) {
 			{
 				resultStr.title = "身分認證失敗";
 				resultStr.message = "帳號或密碼錯誤";
+				res.render("login", {toast: resultStr});
+				return;
 			}
 			else // yes
 			{
@@ -101,7 +103,7 @@ router.post('/signupAction', function (req, res, next) {
 
 			// print success msg
 			console.log("[創號]用戶資訊：", newuser, "\nResult:", resultStr.title);
-			res.render('index', resultStr);
+			res.render('billboard', {toast:resultStr} );
 		}
 	);
 
